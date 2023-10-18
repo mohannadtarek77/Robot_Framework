@@ -1,0 +1,40 @@
+# RobotFramework-Practice
+Practicing [**Robot Framework**](https://robotframework.org/) using [**Browser Library**](https://marketsquare.github.io/robotframework-browser/Browser.html) for **Web GUI** Test Automation and [**Requests library**](https://marketsquare.github.io/robotframework-requests/doc/RequestsLibrary.html) for **APIs** Test Automation.
+
+## **Project Design**:
+We are implementing the **Object Model** design pattern (**Page Object Model** for GUI). And below is the project structure folders:
+* **Object Models** folder: Includes the **APIs** clustered by the services and **GUI Pages** 
+* **Tests** folder: Includes all of our **Test Suites** and **Test Cases** 
+* **Resources** folder: Includes any other files that aren't keywords/code/actions like **Global Variables**, **Configurations**, **Test Data** files, etc...
+* **Utilities** folder: Includes the common global utility keywords/code/actions to be used in other folders, mainly the Object Models and Tests
+
+
+## Setup:
+1. Install [**Python™**](https://www.python.org/downloads/)
+2. Install [**Node.js®**](https://nodejs.org/en/download/)
+3. Open a terminal/commandline windows and **Install Robot Framework** from PyPi with pip: ```pip install robotframework```
+4. Install [**Browser Library**](https://marketsquare.github.io/robotframework-browser/Browser.html): ```pip install robotframework-browser``` then initialize it: ```rfbrowser init```. If rfbrowser is not found/installed for any reason, try ```python -m Browser.entry init``` 
+5. Install [**Requests library**](https://marketsquare.github.io/robotframework-requests/doc/RequestsLibrary.html): ```pip install robotframework-requests```
+6. Install [**JSON Library**](https://robotframework-thailand.github.io/robotframework-jsonlibrary/JSONLibrary.html): ```pip install robotframework-jsonlibrary```
+7. Install [**Pabot**](https://pabot.org/) to be able to perform **Parallel execution** when needed: ```pip install -U robotframework-pabot```
+8. Install [**VS Code IDE**](https://code.visualstudio.com/download) and install **Robot Framework Language Server** plugin and you can install **Material Icon Theme** for better icon visibility.
+
+
+## Execution:
+* To execute all the test cases please run the following command from the terminal/commandline: ```robot -d Results Tests``` 
+* To execute a specific file please run the following command from the terminal/commandline: ```  python -m robot -d Results .\Tests\BlackBird\BlackBirdTests.robot  ``` 
+* And we can change variables like this to run on Firefox with headless mode  ```robot -v browserType:firefox -v headless:True -d Results Tests```
+* For trying allure reporting    ``` python -m robot  -d  allure_robotframework .\Tests\BlackBird\BlackBirdTests.robot  ```
+
+
+## For Checking Report Results:-
+* Open Results Folder and then either choose one of the below 
+
+* For Video please open browser folder and then video
+* For Business Report Details please open report.html 
+* For Technical Logs please open log.html 
+
+
+## For more help 
+*you can also have a look here :https://github.com/MahmoudElSharkawy/RobotFramework-Practice
+P.S: For the execution part, use the above execution section which is the updated one.

@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.1.1 (Python 3.12.0 on win32)" generated="20231017 10:24:04.948" rpa="false" schemaversion="4">
+<suite id="s1" name="BlackBirdTests" source="D:\BlackBird\BlackBird-robot-master\Tests\BlackBird\BlackBirdTests.robot">
+<kw name="Setup" type="SETUP">
+<kw name="Load Test Data JSON File" library="JsonTestDataReader">
+<arg>BlackBird.json</arg>
+<doc>**Use it like this in the Suite Setup keyword:**</doc>
+<kw name="Load Json From File" library="JSONLibrary">
+<var>${testData}</var>
+<arg>${EXECDIR}/Resources/TestDataFiles/JSONs/${jsonFilePath}</arg>
+<arg>encoding=UTF-8</arg>
+<doc>Load JSON from file.</doc>
+<msg timestamp="20231017 10:24:06.543" level="INFO">${testData} = {'searchQuery': {'blackbird': 'blackbird.ai'}, 'index': '1', 'Expected': {'blackbirdLink': 'Team', 'CTOName': 'Dr. Naushad UzZaman'}}</msg>
+<status status="PASS" starttime="20231017 10:24:06.542" endtime="20231017 10:24:06.543"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${testData}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20231017 10:24:06.544" level="INFO">${testData} = {'searchQuery': {'blackbird': 'blackbird.ai'}, 'index': '1', 'Expected': {'blackbirdLink': 'Team', 'CTOName': 'Dr. Naushad UzZaman'}}</msg>
+<status status="PASS" starttime="20231017 10:24:06.543" endtime="20231017 10:24:06.544"/>
+</kw>
+<status status="PASS" starttime="20231017 10:24:06.542" endtime="20231017 10:24:06.544"/>
+</kw>
+<kw name="Initialize New Browser" library="BrowserFactory">
+<if>
+<branch type="IF" condition="'${browserType}' == 'chrome' or '${browserType}' == 'msedge'">
+<kw name="New Browser" library="Browser">
+<arg>chromium</arg>
+<arg>headless=${headless}</arg>
+<arg>channel=${browserType}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="NOT RUN" starttime="20231017 10:24:06.545" endtime="20231017 10:24:06.545"/>
+</kw>
+<status status="NOT RUN" starttime="20231017 10:24:06.544" endtime="20231017 10:24:06.545"/>
+</branch>
+<branch type="ELSE">
+<kw name="New Browser" library="Browser">
+<arg>${browserType}</arg>
+<arg>headless=${headless}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<msg timestamp="20231017 10:24:06.546" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "D:\\BlackBird\\BlackBird-robot-master\\Results\\browser\\traces\\20cd3a24-d913-4a87-9fb2-e2cf493b6845"}</msg>
+<msg timestamp="20231017 10:24:07.704" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"D:\\BlackBird\\BlackBird-robot-master\\Results\\browser\\traces\\20cd3a24-d913-4a87-9fb2-e2cf493b6845"}</msg>
+<status status="PASS" starttime="20231017 10:24:06.545" endtime="20231017 10:24:07.704"/>
+</kw>
+<status status="PASS" starttime="20231017 10:24:06.545" endtime="20231017 10:24:07.705"/>
+</branch>
+<status status="PASS" starttime="20231017 10:24:06.544" endtime="20231017 10:24:07.705"/>
+</if>
+<kw name="New Context" library="Browser">
+<arg>viewport={'width': ${width}, 'height': ${height}}</arg>
+<arg>recordVideo={'dir': '${SUITE NAME}', 'size':{'width':1920, 'height':1080}}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new BrowserContext with specified options.</doc>
+<msg timestamp="20231017 10:24:07.709" level="INFO">{
+  "acceptDownloads": true,
+  "bypassCSP": false,
+  "forcedColors": "none",
+  "hideRfBrowser": "",
+  "ignoreHTTPSErrors": false,
+  "javaScriptEnabled": true,
+  "offline": false,
+  "recordVideo": {
+    "size": {
+      "width": 1920,
+      "height": 1080
+    },
+    "dir": "D:\\BlackBird\\BlackBird-robot-master\\Results\\browser\\video\\BlackBirdTests"
+  },
+  "reducedMotion": "no-preference",
+  "serviceWorkers": "allow",
+  "viewport": {
+    "width": 1920,
+    "height": 1080
+  }
+}</msg>
+<msg timestamp="20231017 10:24:07.760" level="INFO">Successfully created context. </msg>
+<msg timestamp="20231017 10:24:07.761" level="INFO">{'acceptDownloads': True, 'bypassCSP': False, 'forcedColors': 'none', 'hideRfBrowser': '', 'ignoreHTTPSErrors': False, 'javaScriptEnabled': True, 'offline': False, 'recordVideo': {'size': {'width': 1920, 'height': 1080}, 'dir': 'D:\\BlackBird\\BlackBird-robot-master\\Results\\browser\\video\\BlackBirdTests'}, 'reducedMotion': 'no-preference', 'serviceWorkers': 'allow', 'viewport': {'width': 1920, 'height': 1080}}</msg>
+<status status="PASS" starttime="20231017 10:24:07.705" endtime="20231017 10:24:07.761"/>
+</kw>
+<kw name="Set Browser Timeout" library="Browser">
+<arg>${browserTimeout}</arg>
+<tag>Config</tag>
+<tag>Setter</tag>
+<doc>Sets the timeout used by most input and getter keywords.</doc>
+<msg timestamp="20231017 10:24:07.771" level="INFO">Set timeout to: 60000</msg>
+<status status="PASS" starttime="20231017 10:24:07.761" endtime="20231017 10:24:07.771"/>
+</kw>
+<status status="PASS" starttime="20231017 10:24:06.544" endtime="20231017 10:24:07.771"/>
+</kw>
+<kw name="Navigate To Google Home Page" library="BlackBirdPage">
+<kw name="New Page" library="Browser">
+<arg>${url}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<msg timestamp="20231017 10:24:12.785" level="INFO">Successfully initialized new page object and opened url: https://www.google.com/ncr</msg>
+<msg timestamp="20231017 10:24:12.785" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;video width="1920" height="1080" controls&gt;&lt;source src="browser/video/BlackBirdTests/91357e31e5792d4d5ea4c2a26252e8d0.webm" type="video/webm"&gt;&lt;/video&gt;</msg>
+<status status="PASS" starttime="20231017 10:24:07.772" endtime="20231017 10:24:12.785"/>
+</kw>
+<status status="PASS" starttime="20231017 10:24:07.772" endtime="20231017 10:24:12.786"/>
+</kw>
+<status status="PASS" starttime="20231017 10:24:06.541" endtime="20231017 10:24:12.786"/>
+</kw>
+<test id="s1-t1" name="Search for the name of the CTO in Blackbird's Website" line="14">
+<kw name="Search for Blackbird" library="BlackBirdPage">
+<arg>${testData["searchQuery"]["blackbird"]}</arg>
+<kw name="Type Text" library="Browser">
+<arg>${searchBat_textField}</arg>
+<arg>${query}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Types the given ``txt`` into the text field found by ``selector``.</doc>
+<msg timestamp="20231017 10:24:12.807" level="INFO">Types the text 'blackbird.ai' in the given field.</msg>
+<status status="PASS" starttime="20231017 10:24:12.806" endtime="20231017 10:24:13.137"/>
+</kw>
+<kw name="Keyboard Key" library="Browser">
+<arg>press</arg>
+<arg>Enter</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Press a keyboard key on the virtual keyboard or set a key up or down.</doc>
+<status status="PASS" starttime="20231017 10:24:13.137" endtime="20231017 10:24:13.166"/>
+</kw>
+<status status="PASS" starttime="20231017 10:24:12.804" endtime="20231017 10:24:13.166"/>
+</kw>
+<kw name="Validate Search Result for BlackBird" library="BlackBirdPage">
+<arg>${testData["index"]}</arg>
+<arg>${testData["Expected"]["blackbirdLink"]}</arg>
+<kw name="Get Blackbird Locator" library="BlackBirdPage">
+<var>${searchResultLocator}</var>
+<arg>1</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${locator}</var>
+<arg>//a[@href='https://www.blackbird.ai/team']</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20231017 10:24:13.176" level="INFO">${locator} = //a[@href='https://www.blackbird.ai/team']</msg>
+<status status="PASS" starttime="20231017 10:24:13.175" endtime="20231017 10:24:13.176"/>
+</kw>
+<msg timestamp="20231017 10:24:13.176" level="INFO">${searchResultLocator} = //a[@href='https://www.blackbird.ai/team']</msg>
+<status status="PASS" starttime="20231017 10:24:13.174" endtime="20231017 10:24:13.176"/>
+</kw>
+<kw name="Get Text" library="Browser">
+<arg>${searchResultLocator}</arg>
+<arg>==</arg>
+<arg>${ExpectedText}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<msg timestamp="20231017 10:24:14.020" level="INFO">Text: 'Team'</msg>
+<status status="PASS" starttime="20231017 10:24:13.177" endtime="20231017 10:24:14.020"/>
+</kw>
+<status status="PASS" starttime="20231017 10:24:13.170" endtime="20231017 10:24:14.022"/>
+</kw>
+<kw name="Click on Blackbird website" library="BlackBirdPage">
+<kw name="Click" library="Browser">
+<arg>${blackbird_locator}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" starttime="20231017 10:24:14.120" endtime="20231017 10:24:15.067"/>
+</kw>
+<status status="PASS" starttime="20231017 10:24:14.120" endtime="20231017 10:24:15.068"/>
+</kw>
+<kw name="Validate CTO Name" library="BlackBirdPage">
+<arg>${testData["index"]}</arg>
+<arg>${testData["Expected"]["CTOName"]}</arg>
+<kw name="Get CTO Locator" library="BlackBirdPage">
+<var>${searchResultLocator}</var>
+<arg>1</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${locator}</var>
+<arg>//h1[normalize-space()='Dr. Naushad UzZaman']</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20231017 10:24:15.096" level="INFO">${locator} = //h1[normalize-space()='Dr. Naushad UzZaman']</msg>
+<status status="PASS" starttime="20231017 10:24:15.095" endtime="20231017 10:24:15.096"/>
+</kw>
+<msg timestamp="20231017 10:24:15.096" level="INFO">${searchResultLocator} = //h1[normalize-space()='Dr. Naushad UzZaman']</msg>
+<status status="PASS" starttime="20231017 10:24:15.094" endtime="20231017 10:24:15.096"/>
+</kw>
+<kw name="Get Text" library="Browser">
+<arg>${searchResultLocator}</arg>
+<arg>==</arg>
+<arg>${ExpectedText}</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<msg timestamp="20231017 10:24:15.915" level="INFO">Text: 'Dr. Naushad UzZaman'</msg>
+<status status="PASS" starttime="20231017 10:24:15.096" endtime="20231017 10:24:15.915"/>
+</kw>
+<status status="PASS" starttime="20231017 10:24:15.091" endtime="20231017 10:24:15.915"/>
+</kw>
+<status status="PASS" starttime="20231017 10:24:12.786" endtime="20231017 10:24:15.916"/>
+</test>
+<kw name="Close Browser" library="Browser" type="TEARDOWN">
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<msg timestamp="20231017 10:24:19.129" level="INFO">Closed browser</msg>
+<status status="PASS" starttime="20231017 10:24:15.940" endtime="20231017 10:24:19.129"/>
+</kw>
+<status status="PASS" starttime="20231017 10:24:04.950" endtime="20231017 10:24:19.129"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="BlackBirdTests">BlackBirdTests</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20231017 10:24:05.260" level="ERROR">Error in file 'D:\BlackBird\BlackBird-robot-master\Utilities\BrowserFactory.robot' on line 2: Importing library 'SeleniumLibrary' failed: ModuleNotFoundError: No module named 'SeleniumLibrary'
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  D:\BlackBird\BlackBird-robot-master
+  C:\Program Files\Python312\python312.zip
+  C:\Program Files\Python312\DLLs
+  C:\Program Files\Python312\Lib
+  C:\Program Files\Python312
+  C:\Users\ThinkMaster\AppData\Roaming\Python\Python312\site-packages
+  C:\Program Files\Python312\Lib\site-packages</msg>
+</errors>
+</robot>
